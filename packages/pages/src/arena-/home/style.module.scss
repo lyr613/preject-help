@@ -1,0 +1,96 @@
+.Head {
+    display: flex;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 20px;
+    align-items: center;
+    font-size: 14px;
+    .btn {
+        border-radius: 2px;
+        border-width: 1px;
+    }
+    .rootPath {
+        margin-left: 20px;
+    }
+}
+
+.Box {
+    height: calc(100vh - 40px);
+    overflow: auto;
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        box-sizing: border-box;
+        padding: 20px;
+        gap: 20px;
+    }
+    .item {
+        position: relative;
+        border: 1px solid rgb(255, 223, 182);
+        width: 100%;
+        aspect-ratio: 4/3;
+        .name {
+            position: absolute;
+            z-index: 100;
+            left: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            padding: 0 10px;
+            background-color: rgb(255, 230, 197);
+            text-align: center;
+        }
+        .btnbox {
+            display: none;
+            position: absolute;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 100%;
+            .line {
+                box-sizing: border-box;
+                border-bottom: 1px solid rgba(128, 128, 128, 0.24);
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                font-size: 14px;
+                padding: 0 10px;
+                user-select: none;
+                background-color: antiquewhite;
+                cursor: pointer;
+                &:hover {
+                    padding-left: 20px;
+                }
+            }
+        }
+        .imgbox {
+            display: flex;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 50;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        &:hover {
+            .btnbox {
+                display: block;
+            }
+        }
+    }
+}

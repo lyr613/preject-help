@@ -1,0 +1,13 @@
+node_modules
+
+build/
+build-final/
+build-page/
+
+yarn.lock
+yarn-error.log
+.vscode
+
+publish.js
+project-report/
+debug.log
