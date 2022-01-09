@@ -38,11 +38,23 @@ function Head() {
                     if (src) {
                         UtilElec.ipc.send('search_project', src)
                         localStorage.setItem('path', src)
+                        root_path$.next(src)
                     }
                     console.log(o)
                 }}
             >
                 选择路径
+            </button>
+            <button
+                className={style.btn}
+                onClick={() => {
+                    const src = root_path$.value
+                    if (src) {
+                        UtilElec.ipc.send('search_project', src)
+                    }
+                }}
+            >
+                刷新
             </button>
             <span className={style.rootPath}>{rp}</span>
         </div>
@@ -125,9 +137,10 @@ function Item(pt: p_item) {
                         <div
                             className={style.line}
                             onClick={() => {
-                                UtilNode.cd.exec('start .', {
-                                    cwd: p.src,
-                                })
+                                // UtilNode.cd.exec('start .', {
+                                //     cwd: p.src,
+                                // })
+                                UtilElec.ipc.send('path_show', p.src)
                             }}
                         >
                             资源管理器

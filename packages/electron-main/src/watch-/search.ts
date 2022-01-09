@@ -81,6 +81,8 @@ class _t {
             return o
         })
         const msg = UtilReply.msg(rearr)
+        msg.b = true
+        msg.txt = ''
 
         // console.log(rearr)
 

@@ -6,11 +6,15 @@
     align-items: center;
     font-size: 14px;
     .btn {
+        margin-right: 10px;
+        outline-width: 0;
         border-radius: 2px;
         border-width: 1px;
+        border: 1px solid rgb(255, 223, 182);
+        background-color: rgb(255, 249, 241);
     }
     .rootPath {
-        margin-left: 20px;
+        margin-left: 10px;
     }
 }
 
@@ -27,6 +31,7 @@
     .item {
         position: relative;
         border: 1px solid rgb(255, 223, 182);
+        background-color: rgb(255, 249, 241);
         width: 100%;
         aspect-ratio: 4/3;
         .name {
@@ -56,7 +61,7 @@
             width: 100%;
             .line {
                 box-sizing: border-box;
-                border-bottom: 1px solid rgba(128, 128, 128, 0.24);
+                border-bottom: 1px solid rgb(255, 183, 90);
                 width: 100%;
                 height: 30px;
                 line-height: 30px;
@@ -78,14 +83,14 @@
             z-index: 50;
             overflow: hidden;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 30px);
             align-items: center;
             justify-content: center;
         }
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
         &:hover {
             .btnbox {

@@ -8,6 +8,7 @@ import fs from 'fs-extra'
 /** 获取一些路径 */
 export function _watch_path() {
     ipcMain.on('path_pick', path_pick)
+    ipcMain.on('path_show', path_show)
 }
 
 /** 通过选择获取目录 */
@@ -24,7 +25,12 @@ function path_pick(e: Electron.IpcMainEvent, properties: string[] = ['openDirect
             }
             const src = res.filePaths[0]
             msg.b = true
+            msg.txt = ''
             msg.data = src
             UtilReply.reply(e, 'path_pick', msg)
         })
+}
+
+function path_show(e: Electron.IpcMainEvent, src: string) {
+    shell.showItemInFolder(src)
 }
