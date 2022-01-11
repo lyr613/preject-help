@@ -71,7 +71,7 @@ function Box() {
         }
         UtilElec.ipcon('search_project', fun)
         return () => {
-            UtilElec.ipc.removeListener('search_project', fun)
+            UtilElec.ipcRemove('search_project', fun)
         }
     }, [])
     return (

@@ -1,17 +1,8 @@
-export type router1_vo = 'some'
+export type router1_vo = 'home' | 'tran'
 
 interface rt<t> {
     en: t
     cn: string
-}
-
-export function router1(): { [k in router1_vo]: rt<k> } {
-    return {
-        some: {
-            en: 'some',
-            cn: '路由',
-        },
-    }
 }
 
 // 2级

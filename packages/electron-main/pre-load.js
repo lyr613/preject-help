@@ -6,6 +6,9 @@ contextBridge.exposeInMainWorld('elec_', {
     ipcon: (flag, fun) => {
         ipcRenderer.on(flag, fun)
     },
+    ipcRemove: (flag, fun) => {
+        ipcRenderer.removeListener(flag, fun)
+    },
     path: require('path'),
     fs: require('fs'),
     cd: cd,

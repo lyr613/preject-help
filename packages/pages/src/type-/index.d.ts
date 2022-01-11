@@ -14,5 +14,6 @@ interface Window {
             postMessage: (flag: string, nu: null, fun: any) => void
         }
         ipcon: (flag: string, fun: ipconfun) => void
+        ipcRemove: (flag: string, fun: ipconfun) => void
     }
 }

@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs'
-import { router1, router1_vo, router2_some } from './define'
+import { router1_vo, router2_some } from './define'
 
 class _Rt {
     /**
@@ -27,8 +27,6 @@ class _Rt {
         const next = this.make(rt1, ...rests)
         this.pusher$.next(next)
     }
-    /** 1级路由 */
-    l1 = router1()
     l2shelf = router2_some()
 }
 

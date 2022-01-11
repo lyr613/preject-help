@@ -10,6 +10,7 @@ class _UtilElec {
         return re
     }
     ipcon = window.elec_.ipcon
+    ipcRemove = window.elec_.ipcRemove
 }
 
 export const UtilElec = new _UtilElec()
