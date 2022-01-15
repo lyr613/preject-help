@@ -96,7 +96,7 @@ function Item(pt: p_item) {
         <div className={style.Item}>
             <div className={style.item}>
                 <div className={style.name} title={p.name}>
-                    {p.name}
+                    {p.name || p.src}
                 </div>
                 {show_workspace ? (
                     <div className={style.btnbox}>

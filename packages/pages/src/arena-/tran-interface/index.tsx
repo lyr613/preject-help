@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import style from './style.module.scss'
-import { parse } from 'json5'
+import json5 from 'json5'
 
 /** Some */
 export default function TranInterface() {
@@ -35,7 +35,7 @@ export default function TranInterface() {
 function tran(source: string) {
     let str = 'interface Some {'
     try {
-        const obj = JSON.parse(source)
+        const obj = json5.parse(source)
         Object.entries(obj).forEach((kv) => {
             deep_tran(kv[0], kv[1], 1)
         })
@@ -65,7 +65,11 @@ function tran(source: string) {
             return
         }
         if (Array.isArray(v)) {
-            deep_tran(k, v[0], deep)
+            if (v.length) {
+                deep_tran(k, v[0], deep)
+            } else {
+                str += `\n${pre}${k}: any`
+            }
             str += '[]'
             return
         }

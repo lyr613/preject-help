@@ -1,3 +1,6 @@
+.Home {
+    padding-bottom: 80px;
+}
 .Head {
     display: flex;
     box-sizing: border-box;
@@ -19,7 +22,7 @@
 }
 
 .Box {
-    height: calc(100vh - 40px);
+    height: calc(100vh - 80px);
     overflow: auto;
     .container {
         display: grid;
