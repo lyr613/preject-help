@@ -1,3 +1,5 @@
+import path from 'path'
+
 declare type int = number
 declare type float = number
 
@@ -15,5 +17,6 @@ interface Window {
         }
         ipcon: (flag: string, fun: ipconfun) => void
         ipcRemove: (flag: string, fun: ipconfun) => void
+        path: path.PlatformPath
     }
 }

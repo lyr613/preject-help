@@ -1,3 +1,5 @@
+import path from 'path'
+
 class _path {
     private path = (window as any).elec_.path
     join(...srcs: string[]): string {
@@ -14,7 +16,7 @@ class _path {
         return this.path.basename(src)
     }
 }
-const path = new _path()
+const Path = new _path()
 
 interface read_dir_re {
     src_base: string
@@ -124,7 +126,8 @@ const fs = new _fs()
 
 class _node {
     fs = fs
-    path = path
+    path = Path
     cd = (window as any).elec_.cd
+    _path = (window as any).elec_.path as path.PlatformPath
 }
 export const UtilNode = new _node()

@@ -9,9 +9,29 @@ class _t {
         ipcMain.on('search_project', (e, src) => {
             this.search_project(e, src)
         })
+        ipcMain.on('search_projects', (e, src) => {
+            this.search_projects(e, src)
+        })
+    }
+    search_projects(e: Electron.IpcMainEvent, srcs: string[]) {
+        const re = srcs.map((s) => {
+            const ps = this.search(s)
+            return {
+                src: s,
+                projects: ps,
+            }
+        })
+
+        const msg = UtilReply.msg(re)
+        msg.b = true
+        msg.txt = ''
+
+        // console.log(rearr)
+
+        UtilReply.reply(e, 'search_projects', msg)
     }
 
-    search_project(e: Electron.IpcMainEvent, src: string) {
+    search(src: string) {
         const project_srcs: string[] = []
         let stack = [src]
         while (stack.length) {
@@ -80,6 +100,12 @@ class _t {
             }
             return o
         })
+        return rearr
+    }
+
+    search_project(e: Electron.IpcMainEvent, src: string) {
+        const rearr = this.search(src)
+
         const msg = UtilReply.msg(rearr)
         msg.b = true
         msg.txt = ''
