@@ -7,8 +7,6 @@ import { UtilElec } from 'util-/electron'
 import { UtilNode } from 'util-/nodef'
 import style from './style.module.scss'
 
-const root_path$ = new BehaviorSubject(localStorage.getItem('path') || '')
-
 /** Home */
 export default function Home() {
     useEffect(() => {
@@ -30,25 +28,9 @@ export default function Home() {
 }
 
 function Head() {
-    const rp = useObservable(() => root_path$, '')
     const [show_opt, next_show_opt] = useState(false)
     return (
         <div className={style.Head}>
-            <button
-                className={style.btn}
-                onClick={() => {
-                    const o = UtilElec.ipc.sendSync('path_pick')
-                    const src = o.data as string
-                    if (src) {
-                        UtilElec.ipc.send('search_project', src)
-                        localStorage.setItem('path', src)
-                        root_path$.next(src)
-                    }
-                    console.log(o)
-                }}
-            >
-                选择路径
-            </button>
             <button
                 className={style.btn}
                 onClick={() => {
@@ -65,7 +47,6 @@ function Head() {
             >
                 配置
             </button>
-            <span className={style.rootPath}>{rp}</span>
             {show_opt && <Option close={() => next_show_opt(false)} />}
         </div>
     )
