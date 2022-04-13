@@ -1,4 +1,4 @@
-export type router1_vo = 'home' | 'tran'
+export type router1_vo = 'home' | 'tran' | 'links'
 
 interface rt<t> {
     en: t

@@ -1,5 +1,6 @@
 import Bar from 'arena-/bar'
 import Home from 'arena-/home'
+import { Links } from 'arena-/links'
 import TranInterface from 'arena-/tran-interface'
 import React, { useEffect, useState } from 'react'
 import { HashRouter, Route, Switch, useHistory } from 'react-router-dom'
@@ -42,7 +43,8 @@ function Routebox() {
     }, [rt])
     return (
         <Switch>
-            <Route path="/tran" component={TranInterface} />
+            {/* <Route path="/tran" component={TranInterface} /> */}
+            <Route path="/links" component={Links} />
             <Route path="*" component={Home} />
         </Switch>
     )

@@ -15,10 +15,10 @@ export default function Bar() {
             </button>
             <button
                 onClick={() => {
-                    Rt.next('tran')
+                    Rt.next('links')
                 }}
             >
-                转换
+                链接
             </button>
         </div>
     )
