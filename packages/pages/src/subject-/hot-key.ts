@@ -1,3 +1,4 @@
+import { Rt } from 'router-'
 import { fromEvent } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { UtilElec } from 'util-/electron'
@@ -14,6 +15,19 @@ class _hk {
             }
             if (e.altKey) {
                 e.preventDefault()
+                switch (e.keyCode) {
+                    case 49:
+                        Rt.next('home')
+                        break
+                    case 50:
+                        Rt.next('links')
+                        break
+
+                    default:
+                        break
+                }
+                console.log(e.keyCode)
+
                 // alt + ~ 清空所有
             }
         })
