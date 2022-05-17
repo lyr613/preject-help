@@ -28,6 +28,36 @@ export function Links() {
             <div className={style.line}></div>
             <Item type="file" src="C:\Program Files\OpenVPN\bin\openvpn-gui.exe" name="open-vpn" />
             <Item type="file" src="D:\Program Files\DuangCloud\DuangCloud.exe" name="vpn" />
+            <Item2 name="postman" src="C:\Users\zrtxl\AppData\Local\Postman" file_name="Postman.exe" />
+            <div className={style.line}></div>
+            <Item2 name="steam" src="D:\Program Files (x86)\Steam" file_name="steam.exe" />
+            <Item2
+                name="mumu模拟器"
+                src="D:\Program Files\MuMu\emulator\nemu\EmulatorShell"
+                file_name="NemuPlayer.exe"
+            />
+            <Item2 name="qq音乐" src="C:\Program Files (x86)\Tencent\QQMusic" file_name="QQMusic.exe" />
+            <Item2 name="天狼50" src="D:\Program Files (x86)\天狼50\天狼50证券分析系统" file_name="tl50v2.exe" />
+        </div>
+    )
+}
+
+interface item2 {
+    src: string
+    file_name?: string
+    name: string
+}
+function Item2(p: item2) {
+    return (
+        <div
+            className={style.Item}
+            onClick={() => {
+                const srcs = [p.src, p.file_name].filter(Boolean) as string[]
+                const src = UtilNode.path.join(...srcs)
+                UtilNode.cd.exec(`start "" "${src}"`)
+            }}
+        >
+            {p.name}
         </div>
     )
 }
