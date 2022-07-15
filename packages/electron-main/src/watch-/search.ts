@@ -93,7 +93,7 @@ class _t {
             if (existsSync(src_doc)) {
                 const doc_children = readdirSync(src_doc)
                     .filter((v) => {
-                        return /preview.*(png|jpg)/.test(v)
+                        return /(preview|logo).*(png|jpg|svg)/.test(v)
                     })
                     .map((v) => join(src_doc, v))
                 o.previews = doc_children
