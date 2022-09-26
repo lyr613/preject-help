@@ -4,11 +4,13 @@ import { UtilReply } from 'util-/reply'
 import { WindowUtil } from 'window-'
 import path from 'path'
 import fs from 'fs-extra'
+import cd from 'child_process'
 
 /** 获取一些路径 */
 export function _watch_path() {
     ipcMain.on('path_pick', path_pick)
     ipcMain.on('path_show', path_show)
+    ipcMain.on('path_vsc', path_vsc)
 }
 
 /** 通过选择获取目录 */
@@ -33,4 +35,14 @@ function path_pick(e: Electron.IpcMainEvent, properties: string[] = ['openDirect
 
 function path_show(e: Electron.IpcMainEvent, src: string) {
     shell.showItemInFolder(src)
+}
+function path_vsc(e: Electron.IpcMainEvent, src: string) {
+    // shell.showItemInFolder(src)
+    try {
+        cd.execSync(`open -a "Visual Studio Code"  "."`, {
+            cwd: src,
+        })
+    } catch (error) {
+        dialog.showErrorBox('er', String(error))
+    }
 }

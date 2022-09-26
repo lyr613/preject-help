@@ -191,9 +191,10 @@ function Item(pt: p_item) {
                             <div
                                 className={style.line}
                                 onClick={() => {
-                                    UtilNode.cd.exec('code .', {
-                                        cwd: pj,
-                                    })
+                                    // UtilNode.cd.exec('code .', {
+                                    //     cwd: pj,
+                                    // })
+                                    UtilElec.ipc.send('path_vsc', pj)
                                 }}
                                 key={pj}
                             >
@@ -206,9 +207,10 @@ function Item(pt: p_item) {
                         <div
                             className={style.line}
                             onClick={() => {
-                                UtilNode.cd.exec('code .', {
-                                    cwd: p.src,
-                                })
+                                // UtilNode.cd.exec('code .', {
+                                //     cwd: p.src,
+                                // })
+                                UtilElec.ipc.send('path_vsc', p.src)
                             }}
                         >
                             vscode
