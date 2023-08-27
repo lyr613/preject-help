@@ -5,6 +5,7 @@ import { WindowUtil } from 'window-'
 import path from 'path'
 import fs from 'fs-extra'
 import cd from 'child_process'
+import os from 'os'
 
 /** 获取一些路径 */
 export function _watch_path() {
@@ -39,9 +40,16 @@ function path_show(e: Electron.IpcMainEvent, src: string) {
 function path_vsc(e: Electron.IpcMainEvent, src: string) {
     // shell.showItemInFolder(src)
     try {
-        cd.execSync(`open -a "Visual Studio Code"  "."`, {
-            cwd: src,
-        })
+        if (os.platform() === 'darwin') {
+            cd.execSync(`open -a "Visual Studio Code"  "."`, {
+                cwd: src,
+            })
+        } else {
+            cd.execSync(`code .`, {
+                cwd: src,
+                windowsHide: true,
+            })
+        }
     } catch (error) {
         dialog.showErrorBox('er', String(error))
     }
