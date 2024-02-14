@@ -190,10 +190,14 @@ function Item(pt: p_item) {
                         {p.jsprojects.map((pj) => (
                             <div
                                 className={style.line}
-                                onClick={() => {
+                                onClick={(e) => {
                                     // UtilNode.cd.exec('code .', {
                                     //     cwd: pj,
                                     // })
+                                    if (e.ctrlKey) {
+                                        UtilElec.ipc.send('path_show', pj)
+                                        return
+                                    }
                                     UtilElec.ipc.send('path_vsc', pj)
                                 }}
                                 key={pj}
