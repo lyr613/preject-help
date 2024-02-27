@@ -7,6 +7,9 @@ import { UtilElec } from 'util-/electron'
 import { UtilNode } from 'util-/nodef'
 import style from './style.module.scss'
 
+const size$ = new BehaviorSubject<'small' | 'middle' | 'large'>('large')
+const catch_size_key = 'size'
+
 /** Home */
 export default function Home() {
     useEffect(() => {
@@ -18,6 +21,8 @@ export default function Home() {
         // const port1 = channel.port1
         // const port2 = channel.port2
         // UtilElec.ipc.postMessage('port', null, [2333])
+        const size = localStorage.getItem(catch_size_key)
+        size$.next((size as any) || 'large')
     }, [])
     return (
         <div className={style.Home}>
@@ -47,6 +52,33 @@ function Head() {
             >
                 配置
             </button>
+            <button
+                className={style.btn}
+                onClick={() => {
+                    size$.next('small')
+                    localStorage.setItem(catch_size_key, 'small')
+                }}
+            >
+                小
+            </button>
+            <button
+                className={style.btn}
+                onClick={() => {
+                    size$.next('middle')
+                    localStorage.setItem(catch_size_key, 'middle')
+                }}
+            >
+                中
+            </button>
+            <button
+                className={style.btn}
+                onClick={() => {
+                    size$.next('large')
+                    localStorage.setItem(catch_size_key, 'large')
+                }}
+            >
+                大
+            </button>
             {show_opt && <Option close={() => next_show_opt(false)} />}
         </div>
     )
@@ -57,6 +89,7 @@ interface p_opt {
 }
 function Option(p: p_opt) {
     const paths = useObservable(() => SubjectProjectPath.paths$, [])
+
     return (
         <div className={style.Option}>
             <div className={style.container}>
@@ -139,6 +172,8 @@ interface msg {
 }
 function Box() {
     const [pros, next_pros] = useState([] as msg[])
+    const size = useObservable(() => size$, 'large')
+    console.log('size', size)
     useEffect(() => {
         const fun: ipconfun = (e, re: msg_dto<msg[]>) => {
             const arr = re.data
@@ -153,7 +188,18 @@ function Box() {
     return (
         <div className={style.Box}>
             {pros.map((msg) => (
-                <div className={style.container} key={msg.src}>
+                <div
+                    className={style.container}
+                    style={{
+                        gridTemplateColumns:
+                            size === 'large'
+                                ? 'repeat(auto-fill, minmax(240px, 1fr))'
+                                : size === 'middle'
+                                ? 'repeat(auto-fill, minmax(180px, 1fr)'
+                                : 'repeat(auto-fill, minmax(120px, 1fr))',
+                    }}
+                    key={msg.src}
+                >
                     <h2>{msg.src}</h2>
                     {msg.projects.map((p, i) => (
                         <Item project={p} key={i + p.src} />
