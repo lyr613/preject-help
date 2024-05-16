@@ -140,3 +140,16 @@
         }
     }
 }
+
+.Help {
+    position: absolute;
+    z-index: 9999;
+    left: 50vw;
+    top: 40vh;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    background-color: white;
+    padding: 16px;
+    border: 1px solid rgb(255, 223, 182);
+
+}

@@ -34,53 +34,78 @@ export default function Home() {
 
 function Head() {
     const [show_opt, next_show_opt] = useState(false)
+    const [show_help, next_show_help] = useState(false)
     return (
-        <div className={style.Head}>
-            <button
-                className={style.btn}
-                onClick={() => {
-                    UtilElec.ipc.send('search_projects', SubjectProjectPath.paths$.value)
-                }}
-            >
-                刷新
-            </button>
-            <button
-                className={style.btn}
-                onClick={() => {
-                    next_show_opt(true)
-                }}
-            >
-                配置
-            </button>
-            <button
-                className={style.btn}
-                onClick={() => {
-                    size$.next('small')
-                    localStorage.setItem(catch_size_key, 'small')
-                }}
-            >
-                小
-            </button>
-            <button
-                className={style.btn}
-                onClick={() => {
-                    size$.next('middle')
-                    localStorage.setItem(catch_size_key, 'middle')
-                }}
-            >
-                中
-            </button>
-            <button
-                className={style.btn}
-                onClick={() => {
-                    size$.next('large')
-                    localStorage.setItem(catch_size_key, 'large')
-                }}
-            >
-                大
-            </button>
-            {show_opt && <Option close={() => next_show_opt(false)} />}
-        </div>
+        <>
+            <div className={style.Head}>
+                <button
+                    className={style.btn}
+                    onClick={() => {
+                        UtilElec.ipc.send('search_projects', SubjectProjectPath.paths$.value)
+                    }}
+                >
+                    刷新
+                </button>
+                <button
+                    className={style.btn}
+                    onClick={() => {
+                        next_show_opt(true)
+                    }}
+                >
+                    配置
+                </button>
+                <button
+                    className={style.btn}
+                    onClick={() => {
+                        size$.next('small')
+                        localStorage.setItem(catch_size_key, 'small')
+                    }}
+                >
+                    小
+                </button>
+                <button
+                    className={style.btn}
+                    onClick={() => {
+                        size$.next('middle')
+                        localStorage.setItem(catch_size_key, 'middle')
+                    }}
+                >
+                    中
+                </button>
+                <button
+                    className={style.btn}
+                    onClick={() => {
+                        size$.next('large')
+                        localStorage.setItem(catch_size_key, 'large')
+                    }}
+                >
+                    大
+                </button>
+                <button
+                    className={style.btn}
+                    onClick={() => {
+                        next_show_help(true)
+                    }}
+                >
+                    ?
+                </button>
+                {show_opt && <Option close={() => next_show_opt(false)} />}
+            </div>
+            {show_help && (
+                <div className={style.Help}>
+                    <div>package.json配置项: qproject</div>
+
+                    <div
+                        style={{
+                            marginTop: '20px',
+                        }}
+                    >
+                        name: 项目名
+                    </div>
+                    <div>sort: 数字, 小数在前</div>
+                </div>
+            )}
+        </>
     )
 }
 

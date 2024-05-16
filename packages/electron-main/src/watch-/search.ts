@@ -67,39 +67,43 @@ class _t {
         }
         // console.log(project_srcs)
 
-        const rearr = project_srcs.map((src) => {
-            const o: project = {
-                src: src,
-                name: '',
-                jsworkspace: false,
-                previews: [],
-                jsprojects: [],
-            }
-            const src_workspace = join(src, 'packages')
-            if (existsSync(src_workspace)) {
-                o.jsworkspace = true
-                const jscds = readdirSync(src_workspace).map((s) => join(src_workspace, s))
-                o.jsprojects = jscds
-            }
-            // 名字
-            const src_package = join(src, 'package.json')
-            if (existsSync(src_package)) {
-                const t = readFileSync(src_package, 'utf-8')
-                const j = JSON.parse(t)
-                j.name && (o.name = j.name)
-            }
-            // 预览图
-            const src_doc = join(src, 'doc')
-            if (existsSync(src_doc)) {
-                const doc_children = readdirSync(src_doc)
-                    .filter((v) => {
-                        return /(preview|logo).*(png|jpg|svg)/.test(v)
-                    })
-                    .map((v) => join(src_doc, v))
-                o.previews = doc_children
-            }
-            return o
-        })
+        const rearr = project_srcs
+            .map((src) => {
+                const o: project = {
+                    src: src,
+                    name: '',
+                    jsworkspace: false,
+                    previews: [],
+                    jsprojects: [],
+                    sort: 999999,
+                }
+                const src_workspace = join(src, 'packages')
+                if (existsSync(src_workspace)) {
+                    o.jsworkspace = true
+                    const jscds = readdirSync(src_workspace).map((s) => join(src_workspace, s))
+                    o.jsprojects = jscds
+                }
+                // 名字
+                const src_package = join(src, 'package.json')
+                if (existsSync(src_package)) {
+                    const t = readFileSync(src_package, 'utf-8')
+                    const j = JSON.parse(t)
+                    o.name = j.qproject?.name || j.name || o.name
+                    o.sort = j.qproject?.sort || 999999
+                }
+                // 预览图
+                const src_doc = join(src, 'doc')
+                if (existsSync(src_doc)) {
+                    const doc_children = readdirSync(src_doc)
+                        .filter((v) => {
+                            return /(preview|logo).*(png|jpg|svg)/.test(v)
+                        })
+                        .map((v) => join(src_doc, v))
+                    o.previews = doc_children
+                }
+                return o
+            })
+            .sort((a, b) => a.sort - b.sort)
         return rearr
     }
 
