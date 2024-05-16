@@ -47,5 +47,9 @@
         "trailingComma": "all",
         "singleQuote": true,
         "arrowParens": "always"
+    },
+    "qproject": {
+        "sort": 100,
+        "name": "项目助手"
     }
 }
