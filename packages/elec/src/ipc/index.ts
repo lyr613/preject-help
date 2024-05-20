@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron'
 import * as test from './test'
+import * as project from './project'
 
 function flag<
     S extends {
@@ -17,6 +18,8 @@ export function Ipc() {
             case flag<IPCtype.querys.test>('test'):
                 test.test(e, o)
                 break
+            case flag<IPCtype.querys.project_finds>('project_finds'):
+                project.find(e, o)
 
             default:
                 break

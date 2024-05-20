@@ -1,9 +1,10 @@
+import { project } from './projects'
 import type { test_re } from './test'
 declare global {
     namespace IPCtype {
         interface Q {
             search: Record<string, any>
-            data: any
+            result: any
         }
         type R<Data> = {
             /** 错误且msg不够用了才用到 */
@@ -21,12 +22,25 @@ declare global {
             result: R<any>
         }
         namespace querys {
-            // #region 打开文件夹
+            // #region test
             type test = {
                 search: {
                     flag: 'test'
                 }
-                data: R<test_re>
+                result: R<test_re>
+            }
+            type project_finds = {
+                search: {
+                    flag: 'project_finds'
+                    root_paths: string[]
+                }
+                result: R<
+                    {
+                        group_name: string
+                        group_fspath: string
+                        projects: project[]
+                    }[]
+                >
             }
         }
     }

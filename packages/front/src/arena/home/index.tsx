@@ -14,8 +14,16 @@ export default function Home() {
                             flag: 'test',
                         })
                         .subscribe((r) => {
-                            console.log(r)
                             next_re(JSON.stringify(r, null, 4))
+                        })
+
+                    Util.elec
+                        .query_once$<IPCtype.querys.project_finds>({
+                            flag: 'project_finds',
+                            root_paths: ['F:\\deepxin\\20240511审核流'],
+                        })
+                        .subscribe((r) => {
+                            console.log(r)
                         })
                 }}
             >

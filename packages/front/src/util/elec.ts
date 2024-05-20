@@ -27,9 +27,9 @@ export function query$<
         search: {
             flag: string
         }
-        data: any
+        result: any
     },
->(param: Q['search']): Observable<IPCtype.R<Q['data']>> {
+>(param: Q['search']): Observable<IPCtype.R<Q['result']>> {
     const query_id = makeid()
     const param2 = {
         ...param,
@@ -50,9 +50,9 @@ export function query_once$<
         search: {
             flag: string
         }
-        data: any
+        result: any
     },
->(param: Q['search']): Observable<IPCtype.R<Q['data']>> {
+>(param: Q['search']): Observable<IPCtype.R<Q['result']>> {
     return query$<Q>(param).pipe(take(1))
 }
 
