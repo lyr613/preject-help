@@ -14,7 +14,7 @@ export function load_projects() {
     Util.elec
         .query_once$<IPCtype.querys.project_finds>({
             flag: 'project_finds',
-            root_paths: ['F:\\deepxin\\20240511审核流', 'F:\\self'],
+            root_paths: Util.caches.groups.load(),
         })
         .subscribe((r) => {
             console.log('rrr', r)

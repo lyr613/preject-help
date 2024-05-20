@@ -53,6 +53,7 @@ const options = {
 
     win: {
         target: 'nsis',
+        icon: 'public/icon/icon.ico',
     },
     nsis: {
         deleteAppDataOnUninstall: true,
@@ -116,10 +117,10 @@ builder
     })
     .then((result) => {
         console.log(JSON.stringify(result))
-        fs.emptyDirSync(path.join(__dirname, '..', 'distjs'))
-        fs.emptyDirSync(path.join(__dirname, '..', 'distpage'))
-        fs.rmdirSync(path.join(__dirname, '..', 'distjs'))
-        fs.rmdirSync(path.join(__dirname, '..', 'distpage'))
+        // fs.emptyDirSync(path.join(__dirname, '..', 'distjs'))
+        // fs.emptyDirSync(path.join(__dirname, '..', 'distpage'))
+        // fs.rmdirSync(path.join(__dirname, '..', 'distjs'))
+        // fs.rmdirSync(path.join(__dirname, '..', 'distpage'))
         cp.execSync('start .', {
             cwd: path.join(__dirname, '..', 'dist', 'artifacts', 'local'),
         })
