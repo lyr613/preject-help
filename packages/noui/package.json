@@ -1,5 +1,5 @@
 {
-    "name": "@yitouzi/noui",
+    "name": "@prolp/noui",
     "version": "1.0.0",
     "description": "",
     "private": true,
@@ -8,8 +8,7 @@
         "test": "jest"
     },
     "dependencies": {
-        "@yitouzi/api": "1.0.0",
-        "@yitouzi/base": "1.0.0"
+        "@prolp/base": "1.0.0"
     },
     "keywords": [],
     "author": ""

@@ -72,5 +72,6 @@ function parse_group(fspath: string): IPCtype.querys.project_finds['result']['da
         })
         queue = next_queue
     }
+    re.projects.sort((a, b) => a.sort - b.sort)
     return re
 }

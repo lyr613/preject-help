@@ -11,6 +11,7 @@
         "@ant-design/icons": "^5.3.7",
         "@prolp/ipc": "1.0.0",
         "@prolp/base": "1.0.0",
+        "@prolp/noui": "1.0.0",
         "antd": "^5.17.2",
         "clsx": "^2.1.1",
         "echarts": "^5.5.0",

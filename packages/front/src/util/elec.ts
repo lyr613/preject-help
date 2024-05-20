@@ -1,7 +1,6 @@
 import { BASE } from '@prolp/base/src'
 import { BehaviorSubject, Observable, Subject, filter, take } from 'rxjs'
 import { make as makeid } from './id'
-import { IPC } from '@yitouzi/ipc/src'
 
 const elec_resolver$ = new Subject<any>()
 
@@ -29,7 +28,7 @@ export function query$<
         }
         result: any
     },
->(param: Q['search']): Observable<IPCtype.R<Q['result']>> {
+>(param: Q['search']): Observable<Q['result']> {
     const query_id = makeid()
     const param2 = {
         ...param,
@@ -52,7 +51,7 @@ export function query_once$<
         }
         result: any
     },
->(param: Q['search']): Observable<IPCtype.R<Q['result']>> {
+>(param: Q['search']): Observable<Q['result']> {
     return query$<Q>(param).pipe(take(1))
 }
 

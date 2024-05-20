@@ -20,10 +20,10 @@
         "noFallthroughCasesInSwitch": false,
         /** */
         "paths": {
-            "@yitouzi/*": ["../*"],
+            "@prolp/*": ["../*"],
             "@/*": ["./src/*"]
         }
     },
-    "include": ["src", "../base/src", "../api/src", "../noui", "../ipc/src"],
+    "include": ["src", "../base/src", "../noui", "../ipc/src"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
