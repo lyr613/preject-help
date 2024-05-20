@@ -20,6 +20,10 @@ export function Ipc() {
                 break
             case flag<IPCtype.querys.project_finds>('project_finds'):
                 project.find(e, o)
+                break
+            case flag<IPCtype.querys.project_open>('project_open'):
+                project.open(e, o)
+                break
 
             default:
                 break

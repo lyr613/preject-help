@@ -2,6 +2,7 @@ import { useObservable } from 'rxjs-hooks'
 import * as d from './dv'
 import { NOUI } from '@prolp/noui/src'
 import { clsx } from 'clsx'
+import { Util } from '@/util'
 
 export function BlockGroups() {
     const groups = useObservable(
@@ -39,14 +40,14 @@ function OneGroup(p: { group: IPCtype.querys.project_finds['result']['data'][0];
     return (
         <div className={' '}>
             <div className="group my-4 flex items-center bg-blue-100 py-2 pl-6">
-                <h3 className="m-0 text-lg">{p.group.group_name}</h3>
+                <h3 className="m-0 text-lg font-bold">{p.group.group_name}</h3>
                 <div className="ml-4 hidden pt-1 text-sm opacity-60 group-hover:block">{p.group.group_fspath}</div>
             </div>
             <div
                 className="grid px-6"
                 style={{
                     gridTemplateColumns:
-                        p.size === 'large'
+                        p.size === 'big'
                             ? 'repeat(auto-fill, minmax(240px, 1fr))'
                             : p.size === 'middle'
                             ? 'repeat(auto-fill, minmax(180px, 1fr)'
@@ -104,6 +105,14 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                         'cursor-pointer select-none',
                         'transition-all',
                     )}
+                    onClick={() => {
+                        Util.elec.query_once$<IPCtype.querys.project_open>({
+                            flag: 'project_open',
+                            fspath: project.fspath,
+                            vscode: true,
+                            open_children: false,
+                        })
+                    }}
                 >
                     vscode
                 </div>
@@ -117,6 +126,14 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                         'cursor-pointer select-none',
                         'transition-all',
                     )}
+                    onClick={(e) => {
+                        Util.elec.query_once$<IPCtype.querys.project_open>({
+                            flag: 'project_open',
+                            fspath: project.fspath,
+                            vscode: false,
+                            open_children: e.ctrlKey || e.altKey,
+                        })
+                    }}
                 >
                     资源管理器
                 </div>
@@ -132,6 +149,14 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                             'cursor-pointer select-none',
                             'transition-all',
                         )}
+                        onClick={(e) => {
+                            Util.elec.query_once$<IPCtype.querys.project_open>({
+                                flag: 'project_open',
+                                fspath: workchild.fspath,
+                                vscode: !(e.ctrlKey || e.altKey),
+                                open_children: false,
+                            })
+                        }}
                     >
                         {workchild.name}
                     </div>

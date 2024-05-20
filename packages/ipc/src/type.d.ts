@@ -42,6 +42,15 @@ declare global {
                     }[]
                 >
             }
+            type project_open = {
+                search: {
+                    flag: 'project_open'
+                    fspath: string
+                    open_children: boolean
+                    vscode: boolean
+                }
+                result: R<boolean>
+            }
         }
     }
 }

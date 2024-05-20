@@ -1,8 +1,10 @@
-import { Util } from '@/util'
-import * as util from './util'
-import path from 'path'
+import cd from 'child_process'
+import { shell } from 'electron'
 import fs from 'fs-extra'
 import { get } from 'lodash-es'
+import os from 'os'
+import path from 'path'
+import * as util from './util'
 
 export function find(e: Electron.IpcMainEvent, q: IPCtype.querys.project_finds['search']) {
     const groups = q.root_paths
@@ -74,4 +76,29 @@ function parse_group(fspath: string): IPCtype.querys.project_finds['result']['da
     }
     re.projects.sort((a, b) => a.sort - b.sort)
     return re
+}
+
+export function open(e: Electron.IpcMainEvent, q: IPCtype.querys.project_open['search']) {
+    let fspath = q.fspath
+    if (q.open_children) {
+        const first_child = fs.readdirSync(fspath)[0]
+        if (first_child) {
+            fspath = path.join(fspath, first_child)
+        }
+    }
+    if (q.vscode) {
+        if (os.platform() === 'darwin') {
+            cd.execSync(`open -a "Visual Studio Code"  "."`, {
+                cwd: fspath,
+            })
+        } else {
+            cd.execSync(`code .`, {
+                cwd: fspath,
+                windowsHide: true,
+            })
+        }
+    } else {
+        shell.showItemInFolder(fspath)
+    }
+    util.reply(e, q, util.make_result(true))
 }
