@@ -51,6 +51,12 @@ declare global {
                 }
                 result: R<boolean>
             }
+            type project_pick = {
+                search: {
+                    flag: 'project_pick'
+                }
+                result: R<string>
+            }
         }
     }
 }

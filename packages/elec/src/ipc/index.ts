@@ -24,6 +24,9 @@ export function Ipc() {
             case flag<IPCtype.querys.project_open>('project_open'):
                 project.open(e, o)
                 break
+            case flag<IPCtype.querys.project_pick>('project_pick'):
+                project.pick(e, o)
+                break
 
             default:
                 break

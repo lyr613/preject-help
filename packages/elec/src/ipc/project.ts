@@ -1,5 +1,5 @@
 import cd from 'child_process'
-import { shell } from 'electron'
+import { dialog, shell } from 'electron'
 import fs from 'fs-extra'
 import { get } from 'lodash-es'
 import os from 'os'
@@ -101,4 +101,19 @@ export function open(e: Electron.IpcMainEvent, q: IPCtype.querys.project_open['s
         shell.showItemInFolder(fspath)
     }
     util.reply(e, q, util.make_result(true))
+}
+
+export function pick(e: Electron.IpcMainEvent, q: IPCtype.querys.project_pick['search']) {
+    dialog
+        .showOpenDialog({
+            properties: ['openDirectory'],
+        })
+        .then((res) => {
+            if (!res.filePaths.length) {
+                util.reply(e, q, util.make_result(''))
+                return ''
+            }
+            const src = res.filePaths[0]
+            util.reply(e, q, util.make_result(src))
+        })
 }

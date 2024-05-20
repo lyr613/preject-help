@@ -1,8 +1,9 @@
+import { Rout } from '@/routs'
+import { NOUI } from '@prolp/noui/src'
+import { Button, Segmented } from 'antd'
+import clsx from 'clsx'
 import { useObservable } from 'rxjs-hooks'
 import * as d from './dv'
-import { NOUI } from '@prolp/noui/src'
-import clsx from 'clsx'
-import { Rout } from '@/routs'
 
 export function BlockHead() {
     const size = useObservable(
@@ -17,70 +18,45 @@ export function BlockHead() {
     )
     return (
         <div className={clsx('flex  items-center space-x-4 ', 'h-12 whitespace-nowrap px-4')}>
-            <div
-                className="flex w-min cursor-pointer select-none border border-solid border-black px-2 py-1 text-base"
+            <Button
                 onClick={() => {
                     d.load_projects()
                 }}
             >
                 载入
-            </div>
-            <div
-                className="flex w-min cursor-pointer select-none border border-solid border-black px-2 py-1 text-base"
+            </Button>
+            <Button
                 onClick={() => {
                     Rout.go(Rout.target.project.config)
                 }}
             >
                 配置
-            </div>
-            <div
-                className={clsx(
-                    'flex w-min cursor-pointer select-none border border-solid border-black px-2 py-1 text-base',
-                    { 'bg-gray-300': size === 'small' },
-                )}
-                onClick={() => {
+            </Button>
+            <Segmented
+                value={size}
+                options={[
+                    {
+                        label: '小',
+                        value: 'small',
+                    },
+                    {
+                        label: '中',
+                        value: 'middle',
+                    },
+                    {
+                        label: '大',
+                        value: 'big',
+                    },
+                ]}
+                onChange={(v) => {
                     NOUI.Form.hand.value_merge({
                         ctrl: d.ctrl,
                         worker(f) {
-                            f.project_size = 'small'
+                            f.project_size = v as any
                         },
                     })
                 }}
-            >
-                小
-            </div>
-            <div
-                className={clsx(
-                    'flex w-min cursor-pointer select-none border border-solid border-black px-2 py-1 text-base',
-                    { 'bg-gray-300': size === 'middle' },
-                )}
-                onClick={() => {
-                    NOUI.Form.hand.value_merge({
-                        ctrl: d.ctrl,
-                        worker(f) {
-                            f.project_size = 'middle'
-                        },
-                    })
-                }}
-            >
-                中
-            </div>
-            <div
-                className={clsx(
-                    'flex w-min cursor-pointer select-none border border-solid border-black px-2 py-1 text-base',
-                    { 'bg-gray-300': size === 'big' },
-                )}
-                onClick={() => {
-                    NOUI.Form.hand.value_merge({
-                        ctrl: d.ctrl,
-                        worker(f) {
-                            f.project_size = 'big'
-                        },
-                    })
-                }}
-            >
-                大
-            </div>
+            />
         </div>
     )
 }
