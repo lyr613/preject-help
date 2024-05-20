@@ -1,7 +1,7 @@
 import { BASE } from '@prolp/base/src'
 
 type s = ''
-type l = ''
+type l = 'groups'
 
 function make<T extends string | Record<string, any>>(p: {
     key: s | l
@@ -116,3 +116,11 @@ function make_li<T extends string | Record<string, any>>(p: {
     }
     return r
 }
+
+export const groups = make_li<string>({
+    catch_type: 'local',
+    key: 'groups',
+    cook(raw) {
+        return raw
+    },
+})

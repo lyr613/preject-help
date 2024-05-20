@@ -6,6 +6,9 @@ const raw = {
     shard: {
         home: '',
     },
+    project: {
+        config: '',
+    },
 } as const
 
 /** 路由路径 */

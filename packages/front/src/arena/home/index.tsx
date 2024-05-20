@@ -1,10 +1,13 @@
 import { Util } from '@/util'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as d from './dv'
 import { BlockGroups } from './block-groups'
 import { BlockHead } from './block-head'
 
 export default function Home() {
+    useEffect(() => {
+        d.load_projects()
+    }, [])
     return (
         <div className=" ">
             <BlockHead />

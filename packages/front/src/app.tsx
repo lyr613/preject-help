@@ -3,6 +3,7 @@ import { HashRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-
 import { Rout } from './routs'
 import { Util } from './util'
 const LazyHome = React.lazy(() => import('@/arena/home'))
+const LazyProject = React.lazy(() => import('@/arena/project'))
 
 function App() {
     return (
@@ -29,18 +30,18 @@ function RouteBox() {
     return (
         <Routes>
             <Route path="/" element={<Outlet />}>
-                {/* <Route
-                    path={Rout._dev.l1.guzhi}
+                <Route
+                    path={Rout._dev.l1.project}
                     element={
                         <React.Suspense fallback={null}>
-                            <LazyHome />
+                            <LazyProject />
                         </React.Suspense>
                     }
                 >
-                    {Object.values(Rout.target.guzhi).map((target) => (
-                        <Route key={target} path={target} element={<LazyHome target={target} />} />
+                    {Object.values(Rout.target.project).map((target) => (
+                        <Route key={target} path={target} element={<LazyProject rout={target} />} />
                     ))}
-                </Route> */}
+                </Route>
                 <Route
                     index
                     element={

@@ -2,6 +2,7 @@ import { useObservable } from 'rxjs-hooks'
 import * as d from './dv'
 import { NOUI } from '@prolp/noui/src'
 import clsx from 'clsx'
+import { Rout } from '@/routs'
 
 export function BlockHead() {
     const size = useObservable(
@@ -23,6 +24,14 @@ export function BlockHead() {
                 }}
             >
                 载入
+            </div>
+            <div
+                className="flex w-min cursor-pointer select-none border border-solid border-black px-2 py-1 text-base"
+                onClick={() => {
+                    Rout.go(Rout.target.project.config)
+                }}
+            >
+                配置
             </div>
             <div
                 className={clsx(
