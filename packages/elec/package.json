@@ -1,0 +1,45 @@
+{
+    "name": "@prolp/elec",
+    "private": true,
+    "author": {
+        "name": "orb",
+        "email": "orb@orb.com"
+    },
+    "description": "基本的electron",
+    "version": "1.0.0",
+    "type": "commonjs",
+    "main": "main.js",
+    "files": [
+        "dist",
+        "index.d.ts"
+    ],
+    "types": "./index.d.ts",
+    "exports": {
+        "types": "./index.d.ts",
+        "require": "./dist/counter.umd.cjs"
+    },
+    "scripts": {
+        "ts-check": "tsc ",
+        "preview1": "webpack --config ./webpack/dev.config.ts ",
+        "preview2": "chcp 65001 && electron . ",
+        "build": "webpack --config ./webpack/build.config.ts && node ./scripts/build.cjs"
+    },
+    "devDependencies": {
+        "@types/node": "^20.1.3",
+        "@types/webpack": "^5.28.5",
+        "electron": "^30.0.1",
+        "electron-builder": "^24.13.3",
+        "esbuild-loader": "^4.1.0",
+        "ts-loader": "^9.5.1",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.0.4"
+    },
+    "dependencies": {
+        "@prolp/base": "1.0.0",
+        "@prolp/ipc": "1.0.0",
+        "fast-xml-parser": "^4.2.2",
+        "json5": "^2.2.3",
+        "webpack": "^5.91.0",
+        "xlsx": "^0.18.5"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "@prolp/base",
+    "version": "1.0.0",
+    "private": true,
+    "description": "提供最底层的支持, 此子项目不引入其他任意子项目",
+    "main": "src/index.ts",
+    "scripts": {
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": ""
+}

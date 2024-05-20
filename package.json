@@ -1,0 +1,57 @@
+{
+    "name": "project-help",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "scripts": {
+        "install-modules": "yarn -W",
+        "prepare": "node ./scripts/prepare.cjs"
+    },
+    "devDependencies": {
+        "@babel/preset-typescript": "^7.22.11",
+        "@jest/globals": "^29.6.4",
+        "@types/jest": "^29.5.4",
+        "@types/lodash-es": "^4.17.7",
+        "@types/qs": "^6.9.7",
+        "@types/uuid": "^9.0.8",
+        "prettier": "^2.8.8",
+        "prettier-plugin-tailwindcss": "^0.2.8",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.4.5",
+        "vite": "^5.2.9"
+    },
+    "lint-staged": {
+        "*": "prettier --config ./prettier.config.cjs --ignore-unknown --write"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 3 versions",
+        "not ie <= 8",
+        "chrome >= 14",
+        "safari >= 3",
+        "ios >= 8",
+        "android >= 4.0"
+    ],
+    "dependencies": {
+        "dayjs": "^1.11.7",
+        "decimal.js": "^10.4.3",
+        "electron-window-state": "^5.0.3",
+        "husky": "^8.0.3",
+        "immer": "^10.0.2",
+        "jest": "^29.5.0",
+        "lint-staged": "^13.2.2",
+        "lodash-es": "^4.17.21",
+        "qs": "^6.11.1",
+        "rxjs": "^7.8.1",
+        "uuid": "^9.0.1"
+    },
+    "qproject": {
+        "sort": 200,
+        "name": "项目助手"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "module": "ESNext",
+        "skipLibCheck": true,
+
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noFallthroughCasesInSwitch": false,
+        /** */
+        "paths": {
+            "@yitouzi/*": ["../*"],
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": ["src", "../base/src", "../api/src", "../noui", "../ipc/src"],
+    "references": [{ "path": "./tsconfig.node.json" }]
+}
