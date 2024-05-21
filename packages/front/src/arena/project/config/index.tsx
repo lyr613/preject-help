@@ -30,22 +30,7 @@ export function PageConfig() {
         <div className={'text-base'}>
             <div className="flex space-x-4 px-6 py-2">
                 <Button
-                    onClick={() => {
-                        Rout.go(Rout.target.shard.home)
-                    }}
-                >
-                    返回
-                </Button>
-                <Button
-                    onClick={() => {
-                        console.log('dataSource', dataSource)
-                        const li = dataSource.map((v) => v.fspath)
-                        Util.caches.groups.save(li)
-                    }}
-                >
-                    保存
-                </Button>
-                <Button
+                    type={'primary'}
                     onClick={() => {
                         Util.elec
                             .query_once$<IPCtype.querys.project_pick>({
@@ -70,11 +55,28 @@ export function PageConfig() {
                 </Button>
                 <Button
                     onClick={() => {
+                        console.log('dataSource', dataSource)
+                        const li = dataSource.map((v) => v.fspath)
+                        Util.caches.groups.save(li)
+                    }}
+                >
+                    保存
+                </Button>
+
+                <Button
+                    onClick={() => {
                         const li = Util.caches.groups.load()
                         setDataSource(li.map((fspath) => ({ fspath, key: fspath })))
                     }}
                 >
                     刷新
+                </Button>
+                <Button
+                    onClick={() => {
+                        Rout.go(Rout.target.shard.home)
+                    }}
+                >
+                    返回
                 </Button>
             </div>
             <div className="mx-10">

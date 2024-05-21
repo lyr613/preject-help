@@ -17,9 +17,22 @@ export function BlockHead() {
         'middle',
     )
     return (
-        <div className={clsx('flex  items-center space-x-4 ', 'h-12 whitespace-nowrap px-4')}>
+        <div
+            className={clsx(
+                'flex items-center space-x-4 ',
+                'h-12 whitespace-nowrap px-4',
+                'sticky top-0 z-50',
+                'bg-white',
+            )}
+        >
             <Button
                 onClick={() => {
+                    NOUI.Form.hand.value_merge({
+                        ctrl: d.ctrl,
+                        worker(f) {
+                            f.groups = []
+                        },
+                    })
                     d.load_projects()
                 }}
             >
