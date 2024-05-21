@@ -62,11 +62,19 @@ export function PageConfig() {
                                 }
                                 li.push(src)
                                 Util.caches.groups.save(li)
-                                location.reload()
+                                setDataSource(li.map((fspath) => ({ fspath, key: fspath })))
                             })
                     }}
                 >
                     添加
+                </Button>
+                <Button
+                    onClick={() => {
+                        const li = Util.caches.groups.load()
+                        setDataSource(li.map((fspath) => ({ fspath, key: fspath })))
+                    }}
+                >
+                    刷新
                 </Button>
             </div>
             <div className="mx-10">
@@ -75,7 +83,27 @@ export function PageConfig() {
                         <Table<DataType>
                             rowKey="key"
                             components={{ body: { row: Row } }}
-                            columns={columns}
+                            columns={[
+                                { key: 'sort', align: 'center', width: 80, render: () => <DragHandle /> },
+                                { title: '路径', dataIndex: 'fspath' },
+                                {
+                                    title: '删除',
+                                    render(value, record, index) {
+                                        return (
+                                            <Button
+                                                onClick={() => {
+                                                    const li = Util.caches.groups.load()
+                                                    const li2 = li.filter((v) => v !== record.fspath)
+                                                    Util.caches.groups.save(li2)
+                                                    setDataSource(li2.map((fspath) => ({ fspath, key: fspath })))
+                                                }}
+                                            >
+                                                删除
+                                            </Button>
+                                        )
+                                    },
+                                },
+                            ]}
                             dataSource={dataSource}
                             pagination={false}
                         />
@@ -151,7 +179,6 @@ const columns: ColumnsType<DataType> = [
                         const li = Util.caches.groups.load()
                         const li2 = li.filter((v) => v !== record.fspath)
                         Util.caches.groups.save(li2)
-                        location.reload()
                     }}
                 >
                     删除

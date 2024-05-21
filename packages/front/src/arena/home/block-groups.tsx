@@ -102,7 +102,7 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                         'text-sm',
                         'flex items-center',
                         'bg-blue-200 hover:bg-blue-300',
-                        'cursor-pointer select-none',
+                        'cursor-pointer select-none whitespace-nowrap',
                         'transition-all',
                     )}
                     onClick={() => {
@@ -123,7 +123,7 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                         'text-sm',
                         'flex items-center',
                         'bg-blue-200 hover:bg-blue-300',
-                        'cursor-pointer select-none',
+                        'cursor-pointer select-none whitespace-nowrap',
                         'transition-all',
                     )}
                     onClick={(e) => {
@@ -146,7 +146,7 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                             'text-sm',
                             'flex items-center',
                             'bg-blue-200 hover:bg-blue-300',
-                            'cursor-pointer select-none',
+                            'cursor-pointer select-none whitespace-nowrap',
                             'transition-all',
                         )}
                         onClick={(e) => {
