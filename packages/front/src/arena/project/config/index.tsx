@@ -1,7 +1,7 @@
 import { Util } from '@/util'
 import { DndContext } from '@dnd-kit/core'
 import type { DragEndEvent } from '@dnd-kit/core'
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import type { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities'
 import { arrayMove, SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Button, Table } from 'antd'
@@ -11,23 +11,15 @@ import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { CSS } from '@dnd-kit/utilities'
 import { Rout } from '@/routs'
 
-const initialData: DataType[] = Util.caches.groups.load().map((fspath) => ({ fspath, key: fspath }))
-
 export function PageConfig() {
-    const [dataSource, setDataSource] = React.useState<DataType[]>(initialData)
+    const [dataSource, setDataSource] = React.useState<DataType[]>([])
 
-    const onDragEnd = ({ active, over }: DragEndEvent) => {
-        if (active.id !== over?.id) {
-            setDataSource((prevState) => {
-                const activeIndex = prevState.findIndex((record) => record.fspath === active?.id)
-                const overIndex = prevState.findIndex((record) => record.fspath === over?.id)
-                return arrayMove(prevState, activeIndex, overIndex)
-            })
-        }
-    }
+    useEffect(() => {
+        setDataSource(Util.caches.groups.load().map((fspath) => ({ fspath, key: fspath })))
+    }, [])
 
     return (
-        <div className={'text-base'}>
+        <div className={'text-base'} key="page-config">
             <div className="flex space-x-4 px-6 py-2">
                 <Button
                     type={'primary'}
@@ -80,7 +72,18 @@ export function PageConfig() {
                 </Button>
             </div>
             <div className="mx-10">
-                <DndContext modifiers={[restrictToVerticalAxis]} onDragEnd={onDragEnd}>
+                <DndContext
+                    modifiers={[restrictToVerticalAxis]}
+                    onDragEnd={({ active, over }: DragEndEvent) => {
+                        if (active.id !== over?.id) {
+                            setDataSource((prevState) => {
+                                const activeIndex = prevState.findIndex((record) => record.fspath === active?.id)
+                                const overIndex = prevState.findIndex((record) => record.fspath === over?.id)
+                                return arrayMove(prevState, activeIndex, overIndex)
+                            })
+                        }
+                    }}
+                >
                     <SortableContext items={dataSource.map((v) => v.key)} strategy={verticalListSortingStrategy}>
                         <Table<DataType>
                             rowKey="key"

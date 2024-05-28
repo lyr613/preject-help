@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import ModuleHome from '@/arena/home'
+import ModuleProject from '@/arena/project'
+import { useEffect } from 'react'
 import { HashRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 import { Rout } from './routs'
-import { Util } from './util'
-const LazyHome = React.lazy(() => import('@/arena/home'))
-const LazyProject = React.lazy(() => import('@/arena/project'))
 
 function App() {
     return (
@@ -30,34 +29,13 @@ function RouteBox() {
     return (
         <Routes>
             <Route path="/" element={<Outlet />}>
-                <Route
-                    path={Rout._dev.l1.project}
-                    element={
-                        <React.Suspense fallback={null}>
-                            <LazyProject />
-                        </React.Suspense>
-                    }
-                >
+                <Route path={Rout._dev.l1.project} element={<ModuleProject />}>
                     {Object.values(Rout.target.project).map((target) => (
-                        <Route key={target} path={target} element={<LazyProject rout={target} />} />
+                        <Route key={target} path={target} element={<ModuleProject rout={target} />} />
                     ))}
                 </Route>
-                <Route
-                    index
-                    element={
-                        <React.Suspense fallback={null}>
-                            <LazyHome />
-                        </React.Suspense>
-                    }
-                />
-                <Route
-                    path="*"
-                    element={
-                        <React.Suspense fallback={null}>
-                            <LazyHome />
-                        </React.Suspense>
-                    }
-                />
+                <Route index element={<ModuleHome />} />
+                <Route path="*" element={<Navigate to={'/'} />} />
             </Route>
         </Routes>
     )

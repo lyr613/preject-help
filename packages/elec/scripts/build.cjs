@@ -54,6 +54,7 @@ const options = {
     win: {
         target: 'nsis',
         icon: 'public/icon/icon.ico',
+        publisherName: '秋无衣',
     },
     nsis: {
         deleteAppDataOnUninstall: true,

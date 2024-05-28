@@ -7,7 +7,7 @@ interface p {
     rout?: string
 }
 /** , rkey outlet,  */
-export default function MainAccess(p: p) {
+export default function ModuleProject(p: p) {
     if (!p.rout) {
         return <Outlet />
     }
