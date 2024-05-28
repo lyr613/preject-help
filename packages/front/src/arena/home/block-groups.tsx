@@ -39,7 +39,7 @@ export function BlockGroups() {
 function OneGroup(p: { group: IPCtype.querys.project_finds['result']['data'][0]; size: string }) {
     return (
         <div className={' '}>
-            <div className="group my-4 flex items-center bg-blue-100 py-2 pl-6">
+            <div className="bg-primary-100 group my-4 flex items-center py-2 pl-6">
                 <h3 className="m-0 text-lg font-bold">{p.group.group_name}</h3>
                 <div className="ml-4 hidden pt-1 text-sm opacity-60 group-hover:block">{p.group.group_fspath}</div>
             </div>
@@ -69,7 +69,7 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
     const { project } = p
     return (
         <div
-            className={clsx('relative flex flex-col bg-blue-50', 'border border-solid border-blue-200', 'group')}
+            className={clsx('bg-primary-50 relative flex flex-col', 'border-primary-300 border border-solid', 'group')}
             style={{
                 aspectRatio: '4/3',
             }}
@@ -82,7 +82,7 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                 className={clsx(
                     'flex items-center justify-center',
                     'whitespace-nowrap text-sm text-black',
-                    'h-8 bg-blue-100',
+                    'bg-primary-200 h-8',
                     'overflow-hidden',
                 )}
             >
@@ -90,18 +90,21 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
             </div>
             <div
                 className={clsx(
-                    'absolute left-0 top-0 z-20 w-full',
+                    'absolute left-0 top-0 z-20   w-full overflow-y-auto overflow-x-hidden',
                     'hidden group-hover:block',
-                    'border border-solid border-blue-100',
+                    'border-primary-100 border border-solid',
                 )}
+                style={{
+                    maxHeight: '600px',
+                }}
             >
                 <div
                     className={clsx(
                         'box-border h-8 px-4 hover:pl-6',
-                        'border-0 border-b border-solid border-blue-600',
+                        'border-primary-600 border-0 border-b border-solid',
                         'text-sm',
                         'flex items-center',
-                        'bg-blue-200 hover:bg-blue-300',
+                        'bg-primary-200 hover:bg-primary-300',
                         'cursor-pointer select-none whitespace-nowrap',
                         'transition-all',
                     )}
@@ -119,10 +122,10 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                 <div
                     className={clsx(
                         'box-border h-8 px-4 hover:pl-6 ',
-                        'border-0 border-b border-solid border-blue-600',
+                        'border-primary-600 border-0 border-b border-solid',
                         'text-sm',
                         'flex items-center',
-                        'bg-blue-200 hover:bg-blue-300',
+                        'bg-primary-200 hover:bg-primary-300',
                         'cursor-pointer select-none whitespace-nowrap',
                         'transition-all',
                     )}
@@ -142,10 +145,10 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                         key={workchild.fspath}
                         className={clsx(
                             'box-border h-8 px-8 hover:pl-12 ',
-                            'border-0 border-b border-solid border-blue-600',
-                            'text-sm',
+                            'border-primary-600 border-0 border-b border-solid',
+                            workchild.name.length < 20 ? 'text-sm' : 'text-xs',
                             'flex items-center',
-                            'bg-blue-200 hover:bg-blue-300',
+                            'bg-primary-200 hover:bg-primary-300',
                             'cursor-pointer select-none whitespace-nowrap',
                             'transition-all',
                         )}

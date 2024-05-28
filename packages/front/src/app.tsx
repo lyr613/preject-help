@@ -6,9 +6,11 @@ import { Rout } from './routs'
 
 function App() {
     return (
-        <HashRouter>
-            <RouteBox />
-        </HashRouter>
+        <div className="theme-orange">
+            <HashRouter>
+                <RouteBox />
+            </HashRouter>
+        </div>
     )
 }
 

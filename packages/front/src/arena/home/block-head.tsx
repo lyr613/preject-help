@@ -22,7 +22,7 @@ export function BlockHead() {
                 'flex items-center space-x-4 ',
                 'h-12 whitespace-nowrap px-4',
                 'sticky top-0 z-50',
-                'bg-white',
+                '  bg-white',
             )}
         >
             <Button

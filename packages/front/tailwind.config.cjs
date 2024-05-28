@@ -1,5 +1,10 @@
 const plugin = require('tailwindcss/plugin')
 
+const with_opacity =
+    (variable) =>
+    ({ opacityValue }) =>
+        opacityValue === undefined ? `rgb(var(${variable}))` : `rgba(var(${variable}), ${opacityValue})`
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ['./src/**/*.tsx'],
@@ -9,6 +14,17 @@ export default {
                 tzblue: '#66ccff',
                 tzred: '#ee0000',
                 tzgreen: '#66ffcc',
+                primary: {
+                    DEFAULT: 'rgba(var(--color-primary), <alpha-value>)',
+                    50: 'var(--color-primary-50)',
+                    100: 'var(--color-primary-100)',
+                    200: 'var(--color-primary-200)',
+                    300: 'var(--color-primary-300)',
+                    400: 'var(--color-primary-400)',
+                    500: 'var(--color-primary-500)',
+                    600: 'var(--color-primary-600)',
+                    700: 'var(--color-primary-700)',
+                },
             },
         },
     },
