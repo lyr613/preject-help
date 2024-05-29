@@ -8,7 +8,7 @@ export default function ModuleHome() {
         d.load_projects()
     }, [])
     return (
-        <div className="">
+        <div className="animate-tl-opacity-enter">
             <BlockHead />
 
             <BlockGroups />

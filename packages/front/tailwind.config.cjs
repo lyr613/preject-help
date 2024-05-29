@@ -26,6 +26,16 @@ export default {
                     700: 'var(--color-primary-700)',
                 },
             },
+            keyframes: {
+                /**  */
+                'tl-opacity-enter': {
+                    '0%': { opacity: 0 },
+                    '100%': { opacity: 1 },
+                },
+            },
+            animation: {
+                'tl-opacity-enter': 'tl-opacity-enter 0.3s ease-out',
+            },
         },
     },
     plugins: [
@@ -36,14 +46,14 @@ export default {
                 },
             })
             addComponents({
-                '.tz-click-able': {
+                '.tl-click-able': {
                     cursor: 'pointer',
                     transition: 'all 0.3s ease-in-out',
                     '&:hover': {
                         opacity: '0.8',
                     },
                 },
-                '.tz-click-able2': {
+                '.tl-click-able2': {
                     cursor: 'pointer',
                     transition: 'all 0.3s ease-in-out',
                     opacity: '0.8',
@@ -51,16 +61,8 @@ export default {
                         opacity: '1',
                     },
                 },
-                '.tz-click-notable': {
+                '.tl-click-notable': {
                     cursor: 'not-allowed',
-                },
-                '.tz-border': {
-                    borderWidth: '1px',
-                    borderStyle: 'solid',
-                    'border-collapse': 'collapse',
-                },
-                '.tz-w-line': {
-                    borderTop: '0.5px solid #e5e5e5',
                 },
             })
         }),

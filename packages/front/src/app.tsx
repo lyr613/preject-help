@@ -1,18 +1,19 @@
 import ModuleHome from '@/arena/home'
 import ModuleProject from '@/arena/project'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { HashRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 import { Rout } from './routs'
 
 function App() {
-    const themes = ['', 'theme-orange', 'theme-red', 'theme-purple']
-    const i = (Math.random() * themes.length) | 0
+    useEffect(() => {
+        const themes = ['', 'theme-orange', 'theme-red', 'theme-purple']
+        const i = (Math.random() * themes.length) | 0
+        document.body.className = themes[i]
+    }, [])
     return (
-        <div className={themes[i]}>
-            <HashRouter>
-                <RouteBox />
-            </HashRouter>
-        </div>
+        <HashRouter>
+            <RouteBox />
+        </HashRouter>
     )
 }
 
@@ -39,7 +40,7 @@ function RouteBox() {
                     ))}
                 </Route>
                 <Route index element={<ModuleHome />} />
-                <Route path="*" element={<Navigate to={'/'} />} />
+                <Route path="*" element={<ModuleHome />} />
             </Route>
         </Routes>
     )

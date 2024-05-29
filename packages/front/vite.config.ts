@@ -9,9 +9,9 @@ export default defineConfig((env) => {
     return {
         plugins: [
             react(),
-            legacy({
-                polyfills: ['es/map'],
-            }),
+            // legacy({
+            //     polyfills: ['es/map'],
+            // }),
         ],
         base: './',
         server: {

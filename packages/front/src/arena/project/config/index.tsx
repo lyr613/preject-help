@@ -20,7 +20,7 @@ export function PageConfig() {
 
     return (
         <div className={'text-base'} key="page-config">
-            <div className="flex space-x-4 px-6 py-2">
+            <div className="flex h-12 items-center space-x-4 px-4">
                 <Button
                     type={'primary'}
                     onClick={() => {
