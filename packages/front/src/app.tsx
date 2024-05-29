@@ -5,8 +5,10 @@ import { HashRouter, Navigate, Outlet, Route, Routes, useNavigate } from 'react-
 import { Rout } from './routs'
 
 function App() {
+    const themes = ['', 'theme-orange', 'theme-red', 'theme-purple']
+    const i = (Math.random() * themes.length) | 0
     return (
-        <div className="theme-orange">
+        <div className={themes[i]}>
             <HashRouter>
                 <RouteBox />
             </HashRouter>
