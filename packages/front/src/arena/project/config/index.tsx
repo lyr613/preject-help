@@ -47,6 +47,14 @@ export function PageConfig() {
                 </Button>
                 <Button
                     onClick={() => {
+                        const li = Util.caches.groups.load()
+                        setDataSource(li.map((fspath) => ({ fspath, key: fspath })))
+                    }}
+                >
+                    刷新
+                </Button>
+                <Button
+                    onClick={() => {
                         console.log('dataSource', dataSource)
                         const li = dataSource.map((v) => v.fspath)
                         Util.caches.groups.save(li)
@@ -55,14 +63,6 @@ export function PageConfig() {
                     保存
                 </Button>
 
-                <Button
-                    onClick={() => {
-                        const li = Util.caches.groups.load()
-                        setDataSource(li.map((fspath) => ({ fspath, key: fspath })))
-                    }}
-                >
-                    刷新
-                </Button>
                 <Button
                     onClick={() => {
                         Rout.go(Rout.target.shard.home)

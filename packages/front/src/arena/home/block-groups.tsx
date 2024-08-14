@@ -3,6 +3,7 @@ import * as d from './dv'
 import { NOUI } from '@prolp/noui/src'
 import { clsx } from 'clsx'
 import { Util } from '@/util'
+import type { datas, Size } from './type'
 
 export function BlockGroups() {
     const groups = useObservable(
@@ -27,7 +28,7 @@ export function BlockGroups() {
     )
 
     return (
-        <div className={''}>
+        <div className={'pb-96'}>
             {groups.map((group, i) => (
                 <OneGroup group={group} key={group.group_fspath + i} size={size} />
             ))}
@@ -36,7 +37,11 @@ export function BlockGroups() {
 }
 
 // #region group
-function OneGroup(p: { group: IPCtype.querys.project_finds['result']['data'][0]; size: string }) {
+function OneGroup(p: {
+    //
+    group: IPCtype.querys.project_finds['result']['data'][0]
+    size: Size
+}) {
     return (
         <div className={' '}>
             <div className="bg-primary-100 group my-4 flex items-center py-2 pl-6">
@@ -48,16 +53,16 @@ function OneGroup(p: { group: IPCtype.querys.project_finds['result']['data'][0];
                 style={{
                     gridTemplateColumns:
                         p.size === 'big'
-                            ? 'repeat(auto-fill, minmax(240px, 1fr))'
+                            ? 'repeat(auto-fill, minmax(200px, 1fr))'
                             : p.size === 'middle'
-                            ? 'repeat(auto-fill, minmax(180px, 1fr)'
+                            ? 'repeat(auto-fill, minmax(160px, 1fr)'
                             : 'repeat(auto-fill, minmax(120px, 1fr))',
                     gridTemplateRows: 'auto',
                     gap: '12px',
                 }}
             >
                 {p.group.projects.map((project, i) => (
-                    <OneProject project={project} key={project.fspath} />
+                    <OneProject project={project} key={project.fspath} size={p.size} />
                 ))}
             </div>
         </div>
@@ -65,7 +70,11 @@ function OneGroup(p: { group: IPCtype.querys.project_finds['result']['data'][0];
 }
 
 // #region project
-function OneProject(p: { project: IPCtype.querys.project_finds['result']['data'][0]['projects'][0] }) {
+function OneProject(p: {
+    //
+    project: IPCtype.querys.project_finds['result']['data'][0]['projects'][0]
+    size: Size
+}) {
     const { project } = p
     return (
         <div
@@ -81,9 +90,10 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
             <div
                 className={clsx(
                     'flex items-center justify-center',
-                    'whitespace-nowrap text-sm text-black',
+                    'whitespace-nowrap  text-black',
                     'bg-primary-200 h-8',
                     'overflow-hidden',
+                    p.size === 'small' ? 'text-xs' : 'text-sm',
                 )}
             >
                 {project.name}
@@ -95,14 +105,14 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                     'border-primary-100 border border-solid',
                 )}
                 style={{
-                    maxHeight: '600px',
+                    maxHeight: '400px',
+                    boxShadow: '7px 7px 10px 0 rgba(0, 0, 0, 0.3)',
                 }}
             >
                 <div
                     className={clsx(
                         'box-border h-8 px-4 hover:pl-6',
-                        'border-primary-600 border-0 border-b border-solid',
-                        'text-sm',
+                        p.size === 'small' ? 'text-xs' : 'text-sm',
                         'flex items-center',
                         'bg-primary-200 hover:bg-primary-300',
                         'cursor-pointer select-none whitespace-nowrap',
@@ -122,8 +132,8 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                 <div
                     className={clsx(
                         'box-border h-8 px-4 hover:pl-6 ',
-                        'border-primary-600 border-0 border-b border-solid',
-                        'text-sm',
+                        'border-primary-600 border-0 border-t border-solid',
+                        p.size === 'small' ? 'text-xs' : 'text-sm',
                         'flex items-center',
                         'bg-primary-200 hover:bg-primary-300',
                         'cursor-pointer select-none whitespace-nowrap',
@@ -145,8 +155,8 @@ function OneProject(p: { project: IPCtype.querys.project_finds['result']['data']
                         key={workchild.fspath}
                         className={clsx(
                             'box-border h-8 px-8 hover:pl-12 ',
-                            'border-primary-600 border-0 border-b border-solid',
-                            workchild.name.length < 20 ? 'text-sm' : 'text-xs',
+                            'border-primary-600 border-0 border-t border-solid',
+                            workchild.name.length > 20 ? 'text-xs' : p.size === 'small' ? 'text-xs' : 'text-sm',
                             'flex items-center',
                             'bg-primary-200 hover:bg-primary-300',
                             'cursor-pointer select-none whitespace-nowrap',
