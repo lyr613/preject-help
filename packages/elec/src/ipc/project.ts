@@ -57,7 +57,7 @@ function parse_project(it: string) {
         note: '',
     }
     if (fs.existsSync(path.join(it, 'qproject.local.json'))) {
-        const cfg = require(path.join(it, 'qproject.local.json'))
+        const cfg = JSON.parse(fs.readFileSync(path.join(it, 'qproject.local.json')).toString())
         a_project.name = cfg.name ?? a_project.name
         a_project.sort = cfg.sort ?? a_project.sort
         a_project.note = cfg.note ?? a_project.note
