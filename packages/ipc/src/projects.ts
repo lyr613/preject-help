@@ -7,4 +7,5 @@ export type project = {
         name: string
         fspath: string
     }[]
+    note: string
 }

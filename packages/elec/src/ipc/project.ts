@@ -6,12 +6,13 @@ import os from 'os'
 import path from 'path'
 import * as util from './util'
 
+// #region find
 export function find(e: Electron.IpcMainEvent, q: IPCtype.querys.project_finds['search']) {
     const groups = q.root_paths
     const parseds = groups.map(parse_group)
     util.reply(e, q, util.make_result(parseds))
 }
-
+// #region parse_group
 function parse_group(fspath: string): IPCtype.querys.project_finds['result']['data'][0] {
     const re: IPCtype.querys.project_finds['result']['data'][0] = {
         group_fspath: fspath,
@@ -37,39 +38,7 @@ function parse_group(fspath: string): IPCtype.querys.project_finds['result']['da
                 })
                 return
             }
-            const a_project: IPCtype.querys.project_finds['result']['data'][0]['projects'][0] = {
-                fspath: it,
-                jsworkspace: [],
-                logo: '',
-                name: path.basename(it),
-                sort: 999999,
-            }
-            if (fs.existsSync(path.join(it, 'package.json'))) {
-                const package_infor = JSON.parse(fs.readFileSync(path.join(it, 'package.json')).toString())
-                a_project.name =
-                    get(package_infor, 'qproject.name', '') || get(package_infor, 'name', '') || path.basename(it)
-                a_project.sort = get(package_infor, 'qproject.sort', 999999)
-            }
-            const try_logos = [
-                path.join(it, 'doc', 'logo.svg'),
-                path.join(it, 'doc', 'logo.png'),
-                path.join(it, 'doc', 'preview.svg'),
-                path.join(it, 'doc', 'preview.png'),
-            ]
-            for (const logo of try_logos) {
-                if (fs.existsSync(logo)) {
-                    a_project.logo = logo
-                    break
-                }
-            }
-            if (fs.existsSync(path.join(it, 'packages'))) {
-                a_project.jsworkspace.push(
-                    ...fs.readdirSync(path.join(it, 'packages')).map((s) => ({
-                        name: s,
-                        fspath: path.join(it, 'packages', s),
-                    })),
-                )
-            }
+            const a_project = parse_project(it)
             re.projects.push(a_project)
         })
         queue = next_queue
@@ -77,7 +46,53 @@ function parse_group(fspath: string): IPCtype.querys.project_finds['result']['da
     re.projects.sort((a, b) => a.sort - b.sort)
     return re
 }
-
+// #region parse project
+function parse_project(it: string) {
+    const a_project: IPCtype.querys.project_finds['result']['data'][0]['projects'][0] = {
+        fspath: it,
+        jsworkspace: [],
+        logo: '',
+        name: path.basename(it),
+        sort: 999999,
+        note: '',
+    }
+    if (fs.existsSync(path.join(it, 'qproject.local.json'))) {
+        const cfg = require(path.join(it, 'qproject.local.json'))
+        a_project.name = cfg.name ?? a_project.name
+        a_project.sort = cfg.sort ?? a_project.sort
+        a_project.note = cfg.note ?? a_project.note
+    } else if (fs.existsSync(path.join(it, 'package.json'))) {
+        const package_infor = JSON.parse(fs.readFileSync(path.join(it, 'package.json')).toString())
+        a_project.name = get(package_infor, 'qproject.name', '') || get(package_infor, 'name', '') || path.basename(it)
+        a_project.sort = get(package_infor, 'qproject.sort', 999999)
+        a_project.note = get(package_infor, 'qproject.note', '')
+    }
+    // logo
+    const try_logos = [
+        path.join(it, 'doc', 'logo.svg'),
+        path.join(it, 'doc', 'logo.png'),
+        path.join(it, 'doc', 'preview.svg'),
+        path.join(it, 'doc', 'preview.png'),
+    ]
+    for (const logo of try_logos) {
+        if (fs.existsSync(logo)) {
+            a_project.logo = logo
+            break
+        }
+    }
+    // js workspace
+    if (fs.existsSync(path.join(it, 'packages'))) {
+        a_project.jsworkspace.push(
+            ...fs.readdirSync(path.join(it, 'packages')).map((s) => ({
+                name: s,
+                fspath: path.join(it, 'packages', s),
+            })),
+        )
+    }
+    //
+    return a_project
+}
+// #region open
 export function open(e: Electron.IpcMainEvent, q: IPCtype.querys.project_open['search']) {
     let fspath = q.fspath
     if (q.open_children) {
@@ -102,7 +117,7 @@ export function open(e: Electron.IpcMainEvent, q: IPCtype.querys.project_open['s
     }
     util.reply(e, q, util.make_result(true))
 }
-
+// #region pick
 export function pick(e: Electron.IpcMainEvent, q: IPCtype.querys.project_pick['search']) {
     dialog
         .showOpenDialog({
