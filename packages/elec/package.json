@@ -20,9 +20,11 @@
     },
     "scripts": {
         "ts-check": "tsc ",
-        "preview1": "webpack --config ./webpack/dev.config.ts ",
-        "preview2": "chcp 65001 && electron . ",
-        "build": "webpack --config ./webpack/build.config.ts && node ./scripts/build.cjs"
+        "dev1": "webpack --config ./webpack/dev.config.ts ",
+        "dev2-win": "chcp 65001 &&  electron . ",
+        "dev2-mac": " electron . ",
+        "build-win": "webpack --config ./webpack/build.config.ts && node ./scripts/build.cjs",
+        "build-mac": "webpack --config ./webpack/build.config.ts && node ./scripts/build-mac.cjs"
     },
     "devDependencies": {
         "@types/node": "^20.1.3",

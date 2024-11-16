@@ -13,7 +13,7 @@ const cp = require('child_process')
  */
 const options = {
     protocols: {
-        name: '',
+        name: 'qsofrproject',
         // Don't forget to set `MimeType: "x-scheme-handler/deeplink"` for `linux.desktop` entry!
         schemes: ['deeplink'],
     },
@@ -64,7 +64,7 @@ const options = {
 
     mac: {
         target: 'dmg',
-        icon: 'public/icon/icon.icns',
+        icon: 'public/icon/ico.icns',
         hardenedRuntime: true,
         gatekeeperAssess: true,
         extendInfo: {
@@ -74,8 +74,8 @@ const options = {
         },
     },
     dmg: {
-        background: 'installer/mac/dmg-background.png',
-        icon: 'public/icon/icon.icns',
+        // background: 'installer/mac/dmg-background.png',
+        icon: 'public/icon/ico.icns',
         iconSize: 100,
         contents: [
             {
@@ -117,7 +117,7 @@ const options = {
 // Promise is returned
 builder
     .build({
-        targets: Platform.WINDOWS.createTarget(),
+        targets: Platform.MAC.createTarget(),
         config: options,
     })
     .then((result) => {
@@ -126,7 +126,7 @@ builder
         // fs.emptyDirSync(path.join(__dirname, '..', 'distpage'))
         // fs.rmdirSync(path.join(__dirname, '..', 'distjs'))
         // fs.rmdirSync(path.join(__dirname, '..', 'distpage'))
-        cp.execSync('start .', {
+        cp.execSync('open .', {
             cwd: path.join(__dirname, '..', 'dist', 'artifacts', 'local'),
         })
     })
