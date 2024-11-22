@@ -83,10 +83,21 @@ function parse_project(it: string) {
     // js workspace
     if (fs.existsSync(path.join(it, 'packages'))) {
         a_project.jsworkspace.push(
-            ...fs.readdirSync(path.join(it, 'packages')).map((s) => ({
-                name: s,
-                fspath: path.join(it, 'packages', s),
-            })),
+            ...fs
+                .readdirSync(path.join(it, 'packages'))
+                .map((s) => ({
+                    name: s,
+                    fspath: path.join(it, 'packages', s),
+                }))
+                .filter((o) => {
+                    if (!fs.statSync(o.fspath).isDirectory()) {
+                        return false
+                    }
+                    if (o.name.match(/.ds_store/i)) {
+                        return false
+                    }
+                    return true
+                }),
         )
     }
     //
